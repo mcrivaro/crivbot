@@ -1,10 +1,12 @@
 from requests import Request
 from flask import Flask, request
+import os
 import json
 
 app = Flask(__name__)
-config = app.config.from_envvar('FLASK_CONFIG')
-telegram_token = app.config['TOKEN']
+telegram_token = os.getenv('TELEGRAM_TOKEN')
+# config = app.config.from_envvar('FLASK_CONFIG')
+# telegram_token = app.config['TOKEN']
 telegram_uri = f'https://api.telegram.org/Criv_Bot:{telegram_token}/sendMessage'
 
 @app.route('/')
