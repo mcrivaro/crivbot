@@ -9,9 +9,9 @@ try:
     port = os.getenv('PORT')
 except:
     port = 5000
-# config = app.config.from_envvar('FLASK_CONFIG')
-# telegram_token = app.config['TOKEN']
+
 telegram_uri = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
+headers = {'content-type': 'application/json'}
 
 
 @app.route('/')
@@ -27,11 +27,14 @@ def new_message():
         'text': 'Hi From CrivBot!'
     }
     try:
+        test = json.dumps(body)
         res = requests.post(url=telegram_uri,
-                            data=json.dumps(body))
-        print(res.json, res.status_code)
+                            data=json.dumps(body), headers=headers)
+        print(telegram_uri)
+        print(res.text, res.status_code)
         print(f'message sent. status {res}')
     except:
+        raise
         print('error while sending message')
     return message
 
