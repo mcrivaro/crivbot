@@ -5,6 +5,10 @@ import json
 
 app = Flask(__name__)
 telegram_token = os.getenv('TELEGRAM_TOKEN')
+try:
+    port = os.getenv('CRIVBOT_PORT')
+except:
+    port = 5000
 # config = app.config.from_envvar('FLASK_CONFIG')
 # telegram_token = app.config['TOKEN']
 telegram_uri = f'https://api.telegram.org/Criv_Bot:{telegram_token}/sendMessage'
@@ -29,4 +33,4 @@ def new_message():
     
 
 if __name__ == "__main__":    
-    app.run(host='0.0.0.0',port=5000)
+    app.run(host='0.0.0.0',port=port)
