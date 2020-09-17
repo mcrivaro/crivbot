@@ -29,6 +29,7 @@ def new_message():
     try:
         res = requests.post(url=telegram_uri,
                             data=json.dumps(body))
+        print(res.json, res.status_code)
         print(f'message sent. status {res}')
     except:
         print('error while sending message')
