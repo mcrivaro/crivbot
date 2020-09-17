@@ -1,5 +1,6 @@
-import requests
 from flask import Flask, request
+from actions import Action
+import requests
 import os
 import json
 
@@ -11,7 +12,6 @@ except:
     port = 5000
 
 telegram_uri = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
-headers = {'content-type': 'application/json'}
 
 
 @app.route('/')
@@ -21,22 +21,16 @@ def hello_world():
 
 @app.route('/new-message', methods=['POST'])
 def new_message():
-    message = json.loads(request.data)['message']
-    body = {
-        'chat_id': message['chat']['id'],
-        'text': 'Hi From CrivBot!'
-    }
+    message_complete_data = json.loads(request.data)
+    message = message_complete_data['message']
+    chat_id = message['chat']['id']
+    text = message['chat']['text']
     try:
-        test = json.dumps(body)
-        res = requests.post(url=telegram_uri,
-                            data=json.dumps(body), headers=headers)
-        print(telegram_uri)
-        print(res.text, res.status_code)
-        print(f'message sent. status {res}')
+        action = Action(telegram_uri, chat_id, text)
+        action.evaluate()
+        return 'Action has been executed'
     except:
-        raise
-        print('error while sending message')
-    return message
+        return 'Error excecuting action'
 
 
 if __name__ == "__main__":
