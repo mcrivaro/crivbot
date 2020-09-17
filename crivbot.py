@@ -11,7 +11,7 @@ except:
     port = 5000
 # config = app.config.from_envvar('FLASK_CONFIG')
 # telegram_token = app.config['TOKEN']
-telegram_uri = f'https://api.telegram.org/Criv_Bot:{telegram_token}/sendMessage'
+telegram_uri = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
 
 
 @app.route('/')
