@@ -12,7 +12,7 @@ class Action():
         self.matching_filters = [
             {'regex': r'buon\s*giorno|guten\s*morgen|ciao', 'function': 'good_morning'},
             {'regex': r'buona\s*notte|gute\s*nacht', 'function': 'good_night'},
-            {'regex': r'hallo|ciao|hey', 'function': 'say_hello'}
+            {'regex': r'hallo|ciao|hey|hi', 'function': 'say_hello'}
         ]
         print(f'Received message: {message} in chat {chat_id}')
 
