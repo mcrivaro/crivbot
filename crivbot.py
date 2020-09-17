@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 try:
-    port = os.getenv('CRIVBOT_PORT')
+    port = os.getenv('PORT')
 except:
     port = 5000
 # config = app.config.from_envvar('FLASK_CONFIG')
