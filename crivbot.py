@@ -20,6 +20,7 @@ def hello_world():
 @app.route('/new-message', methods=['POST'])
 def new_message():
     message = json.loads(request.data)
+    print(str(message))
     body = {
         'chat_id': message['chat']['id'],
         'text': 'Hi From CrivBot!'
