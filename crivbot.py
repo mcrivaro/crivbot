@@ -23,11 +23,8 @@ def hello_world():
 def new_message():
     message_complete_data = json.loads(request.data)
     print(message_complete_data)
-    message = message_complete_data['message']
-    chat_id = message['chat']['id']
-    text = message['text'] if 'text' in message else None
     try:
-        action = Action(telegram_uri, chat_id, text)
+        action = Action(telegram_uri, message_complete_data)
         action.evaluate()
         return 'Action has been executed'
     except:
