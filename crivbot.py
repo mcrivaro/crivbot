@@ -1,6 +1,5 @@
 from flask import Flask, request
 from actions import Action
-import requests
 import os
 import json
 
@@ -19,6 +18,8 @@ telegram_uri = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
 def hello_world():
     return 'This is CrivBot!'
 
+
+# ToDo: add caching of requests to weather api endpoint
 
 @app.route('/new-message', methods=['POST'])
 def new_message():

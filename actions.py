@@ -1,3 +1,4 @@
+from plugins import weather
 import requests
 import json
 import re
@@ -14,7 +15,8 @@ class Action():
         self.matching_filters = [
             {'regex': r'buon\s*giorno|guten\s*morgen|ciao', 'function': 'good_morning'},
             {'regex': r'buona\s*notte|gute\s*nacht', 'function': 'good_night'},
-            {'regex': r'hallo|ciao|hey|hi', 'function': 'say_hello'}
+            {'regex': r'hallo|ciao|hey|hi', 'function': 'say_hello'},
+            {'regex': r'wetter\s*in\s*([\u00C0-\u017Fa-z\s]+)$', 'function': 'get_current_weather'}
         ]
         print(f'Received message: {self.text} in chat {self.chat_id}')
 
@@ -22,8 +24,9 @@ class Action():
         for filter in self.matching_filters:
             regex = filter['regex']
             function = getattr(self, filter['function'])
-            if re.match(regex, self.text):
-                function()
+            match = re.findall(regex, self.text)
+            function_params = match
+            function(*function_params)
         return 'No action found'
 
     def _send_message(self, text):
@@ -56,3 +59,7 @@ class Action():
         text = random.choice(texts)
         self._send_message(text)
         return 'Greeting sent.'
+
+    def get_current_weather(self, city):
+        wp = weather.WeatherPlugin()
+        wp.query_current_weather(city)
