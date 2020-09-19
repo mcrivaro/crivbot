@@ -62,4 +62,5 @@ class Action():
 
     def get_current_weather(self, city):
         wp = weather.WeatherPlugin()
-        wp.query_current_weather(city)
+        text = wp.query_current_weather(city)
+        self._send_message(text)
