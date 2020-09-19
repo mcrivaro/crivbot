@@ -5,7 +5,7 @@ import random
 
 
 class Action():
-    def __init__(self, telegram_uri, message_complete_data):
+    def __init__(self, bot_name, telegram_uri, message_complete_data):
         self.uri = telegram_uri
         self.message = message_complete_data['message']
         self.chat_id = self.message['chat']['id']
@@ -22,7 +22,7 @@ class Action():
         for filter in self.matching_filters:
             regex = filter['regex']
             function = getattr(self, filter['function'])
-            if re.match(regex, self.message):
+            if re.match(regex, self.text):
                 function()
         return 'No action found'
 

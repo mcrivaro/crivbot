@@ -6,6 +6,7 @@ import json
 
 app = Flask(__name__)
 telegram_token = os.getenv('TELEGRAM_TOKEN')
+bot_name = os.getenv('BOT_NAME')
 try:
     port = os.getenv('PORT')
 except:
@@ -24,7 +25,7 @@ def new_message():
     message_complete_data = json.loads(request.data)
     print(message_complete_data)
     try:
-        action = Action(telegram_uri, message_complete_data)
+        action = Action(bot_name, telegram_uri, message_complete_data)
         action.evaluate()
         return 'Action has been executed'
     except:
