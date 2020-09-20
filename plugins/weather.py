@@ -31,5 +31,5 @@ class WeatherPlugin():
         weather_icon_name = str(response_data['weather'][0]['main']).lower()
         weather_icon = WEATHER_ICONS.get(weather_icon_name, None)
         temperature = str(response_data['main']['temp'])
-        message_text = f'Hallo, Marco. Hier ist das Wetter für heute in {city}.\n {weather_icon} {temperature} Grad, {weather_description}.'
+        message_text = f'Hier ist das Wetter für heute in {city}.\n {weather_icon} {temperature} Grad, {weather_description}.'
         return message_text

@@ -66,5 +66,7 @@ class Action():
     def get_current_weather(self, city='bad säckingen'):
         city = " ".join([name_part.capitalize() for name_part in city.split()])
         wp = weather.WeatherPlugin()
-        text = wp.query_current_weather(city)
+        header = f'Hallo, {self.sender_first_name}.'
+        body = wp.query_current_weather(city)
+        text = f'{header}{body}'
         self._send_message(text)
